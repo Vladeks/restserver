@@ -25,6 +25,11 @@ import java.util.List;
 public class ParkingServices {
 
 
+//	public static final String HOST = "localhost";
+//	public static final int PORT = 27017;
+	public static final String HOST = "mongodb://<dbuser>:<dbpassword>@ds263146.mlab.com:63146/heroku_71zrsf4t";
+	public static final int PORT = 63146;
+
 	@GetMapping("/bicycle")
 	public List<ParkingLocationData> getBicycleParkingList()
 			throws UnknownHostException, ParseException {
@@ -41,7 +46,7 @@ public class ParkingServices {
 
 	public List<ParkingLocationData> getPublicBicycleParkingListFromDB()
 			throws java.net.UnknownHostException {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(HOST, PORT);
 		DB db = mongoClient.getDB("parking_db");
 
 		DBCollection coll = db.getCollection("bicycle_parking");
@@ -91,7 +96,7 @@ public class ParkingServices {
 
 	public List<ParkingLocationData> getPublicCarbikeParkingListFromDB()
 			throws java.net.UnknownHostException {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(HOST, PORT);
 		DB db = mongoClient.getDB("parking_db");
 
 		DBCollection coll = db.getCollection("city_parking_lot");
@@ -160,7 +165,7 @@ public class ParkingServices {
 
 	private boolean saveParkingLocationData(ParkingLocationData data)
 			throws UnknownHostException {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(HOST, PORT);
 		DB db = mongoClient.getDB("parking_db");
 
 		DBCollection coll = db.getCollection("private_parking_data");
@@ -174,7 +179,7 @@ public class ParkingServices {
 	}
 	
 	private List<ParkingLocationData> getPrivateParkingDataFromDB(VehicleType vType) throws ParseException, UnknownHostException {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(HOST, PORT);
 		DB db = mongoClient.getDB("parking_db");
 
 		DBCollection coll = db.getCollection("private_parking_data");
@@ -280,7 +285,7 @@ public class ParkingServices {
 	}
 
 	private boolean bookParkingLocationOnDB(String data) throws UnknownHostException {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(HOST, PORT);
 		DB db = mongoClient.getDB("parking_db");
 
 		System.out.println("update4");
